@@ -1,4 +1,4 @@
-package com.example.majikaapp_tubesandropbd
+package com.tubespbdandroid.majika
 
 import org.junit.Test
 
