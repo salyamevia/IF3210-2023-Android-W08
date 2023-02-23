@@ -96,6 +96,8 @@
     <string name="temperature_value">XX\u2103</string>
     <string name="dummy_rv_text"></string>
     <string name="title_activity_search_results">SearchResultsActivity</string>
+    <string name="bayar">Bayar</string>
+    <string name="title_activity_payment">PaymentActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
