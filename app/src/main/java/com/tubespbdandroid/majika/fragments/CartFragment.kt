@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.Fragment
 import com.tubespbdandroid.majika.PaymentActivity
 import com.tubespbdandroid.majika.R
 import kotlinx.android.synthetic.main.fragment_cart.*
