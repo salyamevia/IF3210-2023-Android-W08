@@ -1,10 +1,11 @@
 package com.tubespbdandroid.majika.retrofit
 
+import com.tubespbdandroid.majika.Config
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object BranchService {
-    val BASE_URL:String = "https://127.0.0.1/v1/" // Android localhost
+    val BASE_URL:String = Config.BASE_URL.value // Android localhost
     val endpoint: BranchAPI
 
     get() {
