@@ -19,7 +19,7 @@ class MenuAdapter(private val list: ArrayList<Menus>): RecyclerView.Adapter<Menu
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.binding.dummyRvContainer.text = list?.get(position)?.name
+        holder.binding.menuName.text = list?.get(position)?.name
     }
 
     override fun getItemCount(): Int {
