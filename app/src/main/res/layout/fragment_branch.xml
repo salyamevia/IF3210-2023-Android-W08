@@ -21,13 +21,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/branch_list_fragment"
-        android:layout_width="409dp"
-        android:layout_height="646dp"
+        android:layout_width="412dp"
+        android:layout_height="479dp"
         android:visibility="invisible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/branch_list_title" />
 </androidx.constraintlayout.widget.ConstraintLayout>

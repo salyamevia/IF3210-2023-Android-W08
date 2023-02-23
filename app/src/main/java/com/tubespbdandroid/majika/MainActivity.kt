@@ -9,6 +9,7 @@ import androidx.fragment.app.replace
 import androidx.fragment.app.add
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
+import com.tubespbdandroid.majika.fragments.BranchFragment
 import com.tubespbdandroid.majika.fragments.CartFragment
 import com.tubespbdandroid.majika.fragments.MenuFragment
 
@@ -36,6 +37,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.cart -> {
                     supportFragmentManager.commit{
                         replace<CartFragment>(R.id.container)
+                    }
+                    true
+                }
+                R.id.branch -> {
+                    supportFragmentManager.commit{
+                        replace<BranchFragment>(R.id.container)
                     }
                     true
                 }

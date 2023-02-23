@@ -1,4 +1,4 @@
-package com.tubespbdandroid.majika.branchlist
+package com.tubespbdandroid.majika.data
 
 data class Branch(val name:String,
                   val popularFood:String,
