@@ -1,11 +1,21 @@
 package com.tubespbdandroid.majika.adapters
 
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.tubespbdandroid.majika.MainActivity
 import com.tubespbdandroid.majika.data.Branch
 import com.tubespbdandroid.majika.databinding.ItemRestoBranchBinding
+import com.tubespbdandroid.majika.fragments.BranchFragment
+import kotlinx.android.synthetic.main.item_resto_branch.*
 
 class BranchAdapter(private val list:List<Branch>) : RecyclerView.Adapter<BranchAdapter.BranchViewHolder>() {
     // Holds the view "components" from the card view
@@ -15,6 +25,19 @@ class BranchAdapter(private val list:List<Branch>) : RecyclerView.Adapter<Branch
         var menu: TextView = binding.branchItemMenuRec
         var address: TextView = binding.branchItemAddress
         var phone: TextView = binding.branchItemPhone
+        var button: Button = binding.branchListMap
+        var latitude: Float = 0.0f
+        var longitude: Float = 0.0f
+
+        init {
+            button.setOnClickListener{
+                val gmmIntentUri = Uri.parse("geo:$latitude,$longitude")
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                //startActivity(mapIntent)
+                Log.d("A", "Hello...")
+            }
+        }
     }
 
     // Create new view to display branches
@@ -34,6 +57,8 @@ class BranchAdapter(private val list:List<Branch>) : RecyclerView.Adapter<Branch
         holder.menu.text = branchListModel.popularFood
         holder.address.text = branchListModel.address
         holder.phone.text = branchListModel.phone
+        holder.latitude = branchListModel.latitude.toFloat()
+        holder.longitude = branchListModel.longitude.toFloat()
     }
 
     // Simply returns the list size

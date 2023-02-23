@@ -1,5 +1,6 @@
 package com.tubespbdandroid.majika.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.tubespbdandroid.majika.MainActivity
+import com.tubespbdandroid.majika.R
 import com.tubespbdandroid.majika.adapters.BranchAdapter
 import com.tubespbdandroid.majika.data.Branch
 import com.tubespbdandroid.majika.databinding.FragmentBranchBinding
 import kotlinx.android.synthetic.main.fragment_branch.*
+import kotlinx.android.synthetic.main.item_resto_branch.*
 
 
 class BranchFragment: Fragment() {
@@ -30,6 +34,7 @@ class BranchFragment: Fragment() {
     ): View? {
         // Inflate (fill in with "variables" from the view) the fragment
         _binding = FragmentBranchBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -41,4 +46,6 @@ class BranchFragment: Fragment() {
             adapter = BranchAdapter(branches)
         }
     }
+
+
 }
