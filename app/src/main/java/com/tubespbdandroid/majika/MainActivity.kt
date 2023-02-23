@@ -4,11 +4,11 @@ import android.app.SearchManager
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils.replace
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.tubespbdandroid.majika.fragments.BranchFragment
 import com.tubespbdandroid.majika.fragments.CartFragment
 import com.tubespbdandroid.majika.fragments.MenuFragment
 import com.tubespbdandroid.majika.fragments.SearchBarFragment
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         supportFragmentManager.commit {
-            replace<MenuFragment>(R.id.main_container)
+            replace<MenuFragment>(R.id.container)
         }
 
         bottomNavigationView.setOnItemSelectedListener {
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.commit {
                         setReorderingAllowed(true)
                         replace<SearchBarFragment>(R.id.search_bar_container)
-                        replace<MenuFragment>(R.id.main_container)
+                        replace<MenuFragment>(R.id.container)
                         addToBackStack("menu")
                     }
                     true
@@ -42,11 +42,17 @@ class MainActivity : AppCompatActivity() {
                     val searchBarFragment = supportFragmentManager.findFragmentById(R.id.search_bar_container) as SearchBarFragment?
                     supportFragmentManager.commit{
                         setReorderingAllowed(true)
-                        replace<CartFragment>(R.id.main_container)
+                        replace<CartFragment>(R.id.container)
                         if (searchBarFragment != null) {
                             remove(searchBarFragment)
                         }
                         addToBackStack("cart")
+                    }
+                    true
+                }
+                R.id.branch -> {
+                    supportFragmentManager.commit{
+                        replace<BranchFragment>(R.id.container)
                     }
                     true
                 }
@@ -71,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                 menuFragment.arguments = bundle
                 supportFragmentManager.commit {
                     setReorderingAllowed(true)
-                    replace(R.id.main_container, menuFragment)
+                    replace(R.id.container, menuFragment)
                     addToBackStack(null)
                 }
             }
