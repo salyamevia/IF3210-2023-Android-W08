@@ -1,11 +1,15 @@
 package com.tubespbdandroid.majika.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import com.tubespbdandroid.majika.PaymentActivity
 import com.tubespbdandroid.majika.R
+import kotlinx.android.synthetic.main.fragment_cart.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +26,8 @@ class CartFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -36,6 +42,14 @@ class CartFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_cart, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val rollButton: Button = button
+        rollButton.setOnClickListener {
+            startActivity(Intent(activity, PaymentActivity::class.java))
+        }
     }
 
     companion object {
