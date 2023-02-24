@@ -12,7 +12,7 @@ Majika App adalah aplikasi untuk membeli makanan dan minuman. Terdapat beberapa 
 
 ### Library
 [yuriy-budiyev](https://github.com/yuriy-budiyev)/**[code-scanner](https://github.com/yuriy-budiyev/code-scanner)**
-
+[Room](https://developer.android.com/training/data-storage/room)
 [Retrofit](https://square.github.io/retrofit/)
 
 ### Screenshot
