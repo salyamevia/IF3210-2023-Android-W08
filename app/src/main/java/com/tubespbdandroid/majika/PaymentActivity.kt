@@ -19,6 +19,11 @@ class PaymentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
+
+        val actionbar = supportActionBar
+        actionbar!!.title = "Payment"
+        actionbar.setDisplayHomeAsUpEnabled(true)
+
         setupPermissions()
         val codeScanner = CodeScanner(this, scn)
 
@@ -33,7 +38,22 @@ class PaymentActivity : AppCompatActivity() {
 
             decodeCallback = DecodeCallback {
                 runOnUiThread {
-                    tv_text.text = it.text
+                    val paymentCall = PaymentClient.service.getPaymentStatus(it.text)
+
+                    paymentCall.enqueue(object: Callback<StringQR> {
+                        override fun onResponse(call: Call<StringQR>, response: Response<StringQR>) {
+                            if (response.body()!!.status == "SUCCESS") {
+                                tv_text.text = response.body()!!.status
+                            }
+                            if (response.body()!!.status == "FAILED") {
+                                tv_text.text = response.body()!!.status
+                            }
+                        }
+
+                        override fun onFailure(call: Call<StringQR>, t: Throwable) {
+                            println(t.message)
+                        }
+                    })
                 }
             }
 
@@ -49,22 +69,6 @@ class PaymentActivity : AppCompatActivity() {
 
         }
 
-        val paymentCall = PaymentClient.service.getPaymentStatus("nwkkyyrqikkxagdkjzcouriirdaxawwy")
-
-        paymentCall.enqueue(object: Callback<StringQR> {
-            override fun onResponse(call: Call<StringQR>, response: Response<StringQR>) {
-                if (response.body()!!.status == "SUCCESS") {
-                    tv_text.text = response.body()!!.status
-                }
-                if (response.body()!!.status == "FAILED") {
-                    tv_text.text = response.body()!!.status
-                }
-            }
-
-            override fun onFailure(call: Call<StringQR>, t: Throwable) {
-                println(t.message)
-            }
-        })
     }
 
     private fun setupPermissions() {
@@ -99,6 +103,11 @@ class PaymentActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     companion object {

@@ -21,8 +21,7 @@
         <activity
             android:name=".PaymentActivity"
             android:exported="false"
-            android:label="@string/title_activity_payment"
-            android:theme="@style/Theme.Majika.NoActionBar" />
+            android:label="@string/title_activity_payment" />
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
