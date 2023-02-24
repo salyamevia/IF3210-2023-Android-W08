@@ -1,129 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <LinearLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.tubespbdandroid.majika.viewmodels.MenuViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardList"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp"
-            android:background="@color/cardview_dark_background">
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="16dp">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.7"
-                    app:layout_constraintLeft_toLeftOf="parent">
-
-                    <TextView
-                        android:id="@+id/menu_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:text="Makanan X"/>
-                    <TextView
-                        android:id="@+id/menu_price"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Rp XX.XXX"/>
-                    <TextView
-                        android:id="@+id/menu_sold"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="17dp"
-                        android:text="10RB+ Terjual"/>
-
-                    <TextView
-                        android:id="@+id/menu_desc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scrollHorizontally="true"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras congue velit venenatis, lobortis massa non, fringilla dui. Sed hendrerit aliquet."/>
-                </LinearLayout>
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/cardview_dark_background">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.3">
-
-                    <Button
-                        android:id="@+id/button"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:insetLeft="3dp"
-                        android:insetTop="3dp"
-                        android:insetRight="3dp"
-                        android:insetBottom="3dp"
-                        android:padding="0dp"
-                        android:text="-"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/textView"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="16dp">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.5"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        app:layout_constraintWidth_percent="0.7"
+                        app:layout_constraintLeft_toLeftOf="parent">
 
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/menu_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:text="Makanan X"/>
+                        <TextView
+                            android:id="@+id/menu_price"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Rp XX.XXX"/>
+                        <TextView
+                            android:id="@+id/menu_sold"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="17dp"
+                            android:text="10RB+ Terjual"/>
+
+                        <TextView
+                            android:id="@+id/menu_desc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollHorizontally="true"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras congue velit venenatis, lobortis massa non, fringilla dui. Sed hendrerit aliquet."/>
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="1"
-                        android:textSize="17sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/button2"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/button"
+                        app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.5" />
+                        app:layout_constraintWidth_percent="0.3">
 
-                    <Button
-                        android:id="@+id/button2"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:insetLeft="3dp"
-                        android:insetTop="3dp"
-                        android:insetRight="3dp"
-                        android:insetBottom="3dp"
-                        android:padding="0dp"
-                        android:text="+"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/textView"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.5"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        <Button
+                            android:id="@+id/button"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:insetLeft="3dp"
+                            android:insetTop="3dp"
+                            android:insetRight="3dp"
+                            android:insetBottom="3dp"
+                            android:padding="0dp"
+                            android:text="-"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/textView"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.5"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1"
+                            android:textSize="17sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/button2"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/button"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.5" />
+
+                        <Button
+                            android:id="@+id/button2"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:insetLeft="3dp"
+                            android:insetTop="3dp"
+                            android:insetRight="3dp"
+                            android:insetBottom="3dp"
+                            android:padding="0dp"
+                            android:text="+"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/textView"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.5"
+                            tools:ignore="TouchTargetSizeCheck" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-    </LinearLayout>
+        </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

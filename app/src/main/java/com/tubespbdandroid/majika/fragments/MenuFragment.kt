@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tubespbdandroid.majika.R
@@ -17,6 +18,7 @@ import com.tubespbdandroid.majika.data.DefaultResponse
 import com.tubespbdandroid.majika.data.RestaurantMenu
 import com.tubespbdandroid.majika.databinding.FragmentMenuBinding
 import com.tubespbdandroid.majika.retrofit.menus.MenusClient
+import com.tubespbdandroid.majika.viewmodels.MenuViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,6 +30,13 @@ class MenuFragment : Fragment(), SensorEventListener {
     private var temperature: Sensor? = null
     private var tempVal: Int = 0
     private var queryArgs: String? = null
+    private val viewModel: MenuViewModel by lazy {
+        val activity = requireNotNull(this.activity) {
+            "You can only access the viewModel after onActivityCreated()"
+        }
+        ViewModelProvider(this, MenuViewModel.Factory(activity.application))
+            .get(MenuViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

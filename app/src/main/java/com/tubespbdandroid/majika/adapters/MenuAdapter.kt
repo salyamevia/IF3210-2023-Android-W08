@@ -23,7 +23,7 @@ class MenuAdapter(private val list: ArrayList<RestaurantMenu>): RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val displayedPrice = "Rp ${formatPrice(list?.get(position)?.price)}"
+        val displayedPrice = "Rp ${formatPrice(list?.get(position)?.price, list?.get(position)?.currency)}"
         val displayedSold = "${formatSold(list?.get(position)?.sold!!)} Terjual"
 
 
@@ -37,7 +37,7 @@ class MenuAdapter(private val list: ArrayList<RestaurantMenu>): RecyclerView.Ada
         return list.size
     }
 
-    private fun formatPrice(price: Int?): String {
+    private fun formatPrice(price: Int?, currencyCode: String?): String {
         val format = NumberFormat.getCurrencyInstance()
         format.maximumFractionDigits = 0
         format.currency = Currency.getInstance("IDR")
