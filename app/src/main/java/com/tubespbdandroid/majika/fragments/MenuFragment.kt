@@ -32,7 +32,7 @@ class MenuFragment : Fragment(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        queryArgs = arguments?.getString("query")
+        queryArgs = arguments?.getString("query")?.trim()
     }
 
     override fun onCreateView(

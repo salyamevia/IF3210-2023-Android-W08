@@ -2,9 +2,11 @@ package com.tubespbdandroid.majika
 
 import android.app.SearchManager
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.system.Os.remove
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatDelegate
@@ -16,20 +18,59 @@ import com.tubespbdandroid.majika.databinding.ItemRestoBranchBinding
 import com.tubespbdandroid.majika.fragments.*
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private var selectedBottomNavBarItemId = R.id.menu
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setLayoutViewBasedOnOrientation(resources.configuration.orientation)
         handleSearchIntent(intent)
 
-        //        DELETE TO ENABLE NIGHT MODE
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)) as Button
+//        DELETE TO ENABLE NIGHT MODE
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+    }
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        supportFragmentManager.commit {
-            replace<TwibbonFragment>(R.id.container)
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        handleSearchIntent(intent)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        setLayoutViewBasedOnOrientation(newConfig.orientation)
+    }
+
+    private fun handleSearchIntent(intent: Intent) {
+        try {
+            if (Intent.ACTION_SEARCH == intent.action) {
+                val query = intent.getStringExtra(SearchManager.QUERY)!!
+                val bundle = Bundle()
+                bundle.putString("query", query)
+
+                val menuFragment = MenuFragment()
+                menuFragment.arguments = bundle
+                supportFragmentManager.commit {
+                    setReorderingAllowed(true)
+                    replace(R.id.container, menuFragment)
+                    addToBackStack(null)
+                }
+            }
+        } catch (error: Error) {
+            println(error.message)
         }
 
+    }
+
+    private fun initBottomNavBarListener() {
         bottomNavigationView.setOnItemSelectedListener {
+            selectedBottomNavBarItemId = it.itemId
+            val searchBarFragment = supportFragmentManager.findFragmentById(R.id.search_bar_container) as SearchBarFragment?
+            supportFragmentManager.commit{
+                if (searchBarFragment != null) {
+                    remove(searchBarFragment)
+                }
+            }
             when (it.itemId) {
                 R.id.menu -> {
                     supportFragmentManager.commit {
@@ -41,13 +82,9 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.cart -> {
-                    val searchBarFragment = supportFragmentManager.findFragmentById(R.id.search_bar_container) as SearchBarFragment?
                     supportFragmentManager.commit{
                         setReorderingAllowed(true)
                         replace<CartFragment>(R.id.container)
-                        if (searchBarFragment != null) {
-                            remove(searchBarFragment)
-                        }
                         addToBackStack("cart")
                     }
                     true
@@ -71,30 +108,19 @@ class MainActivity : AppCompatActivity() {
     }
     }
 
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
-        handleSearchIntent(intent)
-    }
-
-    private fun handleSearchIntent(intent: Intent) {
-        try {
-            if (Intent.ACTION_SEARCH == intent.action) {
-                val query = intent.getStringExtra(SearchManager.QUERY)!!
-                val bundle = Bundle()
-                bundle.putString("query", query)
-
-                val menuFragment = MenuFragment()
-                menuFragment.arguments = bundle
-                supportFragmentManager.commit {
-                    setReorderingAllowed(true)
-                    replace(R.id.container, menuFragment)
-                    addToBackStack(null)
-                }
+    private fun setLayoutViewBasedOnOrientation(orientation: Int) {
+        when (orientation) {
+            Configuration.ORIENTATION_PORTRAIT -> {
+                setContentView(R.layout.activity_main)
             }
-        } catch (error: Error) {
-            println(error.message)
+            Configuration.ORIENTATION_LANDSCAPE -> {
+                setContentView(R.layout.activity_main_landscape)
+            }
         }
 
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        initBottomNavBarListener()
+        bottomNavigationView.selectedItemId = selectedBottomNavBarItemId
     }
 
 }
