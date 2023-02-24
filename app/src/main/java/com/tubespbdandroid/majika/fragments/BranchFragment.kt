@@ -56,7 +56,7 @@ class BranchFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        (activity as AppCompatActivity).supportActionBar?.title = "Branch"
 
         branchesCall.enqueue(object: Callback<DefaultResponse<Branch>> {
             override fun onResponse(call: Call<DefaultResponse<Branch>>,
@@ -90,10 +90,5 @@ class BranchFragment: Fragment() {
 
             startActivity(mapIntent) // Ini ga bisa dipke di adapter krn perlu "activity"
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = "Branch"
     }
 }
