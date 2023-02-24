@@ -3,17 +3,13 @@ package com.tubespbdandroid.majika
 import android.app.SearchManager
 import android.content.Intent
 import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.system.Os.remove
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.tubespbdandroid.majika.fragments.BranchFragment
-import com.tubespbdandroid.majika.fragments.CartFragment
-import com.tubespbdandroid.majika.fragments.MenuFragment
-import com.tubespbdandroid.majika.fragments.SearchBarFragment
+import com.tubespbdandroid.majika.fragments.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -90,6 +86,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.branch -> {
                     supportFragmentManager.commit{
                         replace<BranchFragment>(R.id.container)
+                    }
+                    true
+                }
+
+                R.id.twibbon -> {
+                    supportFragmentManager.commit {
+                        replace<TwibbonFragment>(R.id.container)
                     }
                     true
                 }

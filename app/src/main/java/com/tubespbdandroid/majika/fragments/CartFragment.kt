@@ -2,12 +2,13 @@ package com.tubespbdandroid.majika.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.tubespbdandroid.majika.PaymentActivity
 import com.tubespbdandroid.majika.R
 import com.tubespbdandroid.majika.databinding.FragmentCartBinding
@@ -39,6 +40,7 @@ class CartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = "Keranjang"
         val rollButton: Button = button
         rollButton.setOnClickListener {
             startActivity(Intent(activity, PaymentActivity::class.java))
