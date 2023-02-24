@@ -3,26 +3,23 @@ package com.tubespbdandroid.majika.fragments
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.*
-import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.provider.MediaStore.Audio.Media
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
-import com.tubespbdandroid.majika.MainActivity
 import com.tubespbdandroid.majika.R
 import com.tubespbdandroid.majika.databinding.FragmentTwibbonBinding
 import kotlin.random.Random
@@ -65,6 +62,11 @@ class TwibbonFragment: Fragment() {
 
         }
         return fragmentTwibbonBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = "Twibbon"
     }
 
    private fun requestCameraPerms() : Boolean {

@@ -56,7 +56,7 @@ class BranchFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = "Branch"
+        (activity as AppCompatActivity).supportActionBar?.title = "Cabang Restoran"
 
         branchesCall.enqueue(object: Callback<DefaultResponse<Branch>> {
             override fun onResponse(call: Call<DefaultResponse<Branch>>,

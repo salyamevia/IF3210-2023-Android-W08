@@ -1,7 +1,9 @@
 package com.tubespbdandroid.majika
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +23,7 @@ class PaymentActivity : AppCompatActivity() {
         setContentView(R.layout.activity_payment)
 
         val actionbar = supportActionBar
-        actionbar!!.title = "Payment"
+        actionbar!!.title = "Pembayaran"
         actionbar.setDisplayHomeAsUpEnabled(true)
 
         setupPermissions()
@@ -43,10 +45,13 @@ class PaymentActivity : AppCompatActivity() {
                     paymentCall.enqueue(object: Callback<StringQR> {
                         override fun onResponse(call: Call<StringQR>, response: Response<StringQR>) {
                             if (response.body()!!.status == "SUCCESS") {
-                                tv_text.text = response.body()!!.status
+                                tv_text.text = "Pembayaran Berhasil"
+                                Handler().postDelayed({
+                                    startActivity(Intent(this@PaymentActivity, MainActivity::class.java))
+                                }, 5000)
                             }
                             if (response.body()!!.status == "FAILED") {
-                                tv_text.text = response.body()!!.status
+                                tv_text.text = "Pembayaran Gagal, Coba Lagi"
                             }
                         }
 

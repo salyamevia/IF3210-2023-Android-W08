@@ -47,7 +47,7 @@ class CartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = "Cart"
+        (activity as AppCompatActivity).supportActionBar?.title = "Keranjang"
         val rollButton: Button = button
         rollButton.setOnClickListener {
             startActivity(Intent(activity, PaymentActivity::class.java))
