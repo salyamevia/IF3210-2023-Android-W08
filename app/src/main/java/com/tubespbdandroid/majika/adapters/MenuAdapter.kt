@@ -26,7 +26,6 @@ class MenuAdapter(private val list: ArrayList<RestaurantMenu>): RecyclerView.Ada
         val displayedPrice = "Rp ${formatPrice(list?.get(position)?.price)}"
         val displayedSold = "${formatSold(list?.get(position)?.sold!!)} Terjual"
 
-
         holder.binding.menuName.text = list?.get(position)?.name
         holder.binding.menuDesc.text = list?.get(position)?.description
         holder.binding.menuPrice.text = displayedPrice

@@ -2,12 +2,17 @@ package com.tubespbdandroid.majika
 
 import android.app.SearchManager
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.tubespbdandroid.majika.databinding.ItemRestoBranchBinding
 import com.tubespbdandroid.majika.fragments.*
 
 class MainActivity : AppCompatActivity() {
@@ -16,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         handleSearchIntent(intent)
 
-//        DELETE TO ENABLE NIGHT MODE
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        //        DELETE TO ENABLE NIGHT MODE
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)) as Button
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         supportFragmentManager.commit {
@@ -63,6 +68,7 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
     }
 
     override fun onNewIntent(intent: Intent) {

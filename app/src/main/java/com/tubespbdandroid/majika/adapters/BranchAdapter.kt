@@ -1,5 +1,6 @@
 package com.tubespbdandroid.majika.adapters
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -20,24 +21,14 @@ import kotlinx.android.synthetic.main.item_resto_branch.*
 class BranchAdapter(private val list:List<Branch>) : RecyclerView.Adapter<BranchAdapter.BranchViewHolder>() {
     // Holds the view "components" from the card view
     // Using data binding rather than findViewById
-    class BranchViewHolder(private val binding: ItemRestoBranchBinding): RecyclerView.ViewHolder(binding.root) {
+    class BranchViewHolder(private val binding: ItemRestoBranchBinding,): RecyclerView.ViewHolder(binding.root) {
         val name: TextView = binding.branchItemName
         var menu: TextView = binding.branchItemMenuRec
         var address: TextView = binding.branchItemAddress
         var phone: TextView = binding.branchItemPhone
-        var button: Button = binding.branchListMap
         var latitude: Float = 0.0f
         var longitude: Float = 0.0f
 
-        init {
-            button.setOnClickListener{
-                val gmmIntentUri = Uri.parse("geo:$latitude,$longitude")
-                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-                mapIntent.setPackage("com.google.android.apps.maps")
-                //startActivity(mapIntent)
-                Log.d("A", "Hello...")
-            }
-        }
     }
 
     // Create new view to display branches
