@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="400dp"
         app:autoFocusButtonColor="@color/white"
-        app:autoFocusButtonVisible="true"
+        app:autoFocusButtonVisible="false"
         app:flashButtonColor="@color/white"
-        app:flashButtonVisible="true"
+        app:flashButtonVisible="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

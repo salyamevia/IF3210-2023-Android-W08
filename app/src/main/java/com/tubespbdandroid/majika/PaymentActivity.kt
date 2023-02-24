@@ -8,7 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.*
+import com.tubespbdandroid.majika.data.StringQR
+import com.tubespbdandroid.majika.retrofit.payment.PaymentClient
 import kotlinx.android.synthetic.main.activity_payment.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PaymentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +48,23 @@ class PaymentActivity : AppCompatActivity() {
             }
 
         }
+
+        val paymentCall = PaymentClient.service.getPaymentStatus("nwkkyyrqikkxagdkjzcouriirdaxawwy")
+
+        paymentCall.enqueue(object: Callback<StringQR> {
+            override fun onResponse(call: Call<StringQR>, response: Response<StringQR>) {
+                if (response.body()!!.status == "SUCCESS") {
+                    tv_text.text = response.body()!!.status
+                }
+                if (response.body()!!.status == "FAILED") {
+                    tv_text.text = response.body()!!.status
+                }
+            }
+
+            override fun onFailure(call: Call<StringQR>, t: Throwable) {
+                println(t.message)
+            }
+        })
     }
 
     private fun setupPermissions() {
