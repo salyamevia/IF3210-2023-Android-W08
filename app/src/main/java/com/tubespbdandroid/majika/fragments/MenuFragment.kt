@@ -6,14 +6,20 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tubespbdandroid.majika.R
 import com.tubespbdandroid.majika.adapters.MenuAdapter
-import com.tubespbdandroid.majika.data.Menus
+import com.tubespbdandroid.majika.data.DefaultResponse
+import com.tubespbdandroid.majika.data.RestaurantMenu
 import com.tubespbdandroid.majika.databinding.FragmentMenuBinding
+import com.tubespbdandroid.majika.retrofit.menus.MenusClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MenuFragment : Fragment(), SensorEventListener {
     private var _binding: FragmentMenuBinding? = null
@@ -57,19 +63,67 @@ class MenuFragment : Fragment(), SensorEventListener {
         sensorManager = requireActivity().getSystemService(Context.SENSOR_SERVICE) as SensorManager
         temperature = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
 
-        val (listMenuFoods, listMenuBeverages) = fetchData()
+        val foodCall = MenusClient.service.getAllFoods()
+        val drinkCall = MenusClient.service.getAllDrinks()
 
-        if (listMenuFoods.size == 0) {
-            binding.foodsNoData.visibility = View.VISIBLE
-        } else {
-            initAdapter(listMenuFoods, binding.foodsRecyclerView)
-        }
+        var foods = ArrayList<RestaurantMenu>()
+        var beverages = ArrayList<RestaurantMenu>()
 
-        if (listMenuBeverages.size == 0) {
-            binding.beveragesNoData.visibility = View.VISIBLE
-        } else {
-            initAdapter(listMenuBeverages, binding.beveragesRecyclerView)
-        }
+        val foodRecyclerView = binding.foodsRecyclerView
+        val beveragesRecyclerView = binding.beveragesRecyclerView
+
+        foodCall.enqueue(object: Callback<DefaultResponse<RestaurantMenu>> {
+            override fun onResponse(call: Call<DefaultResponse<RestaurantMenu>>, response: Response<DefaultResponse<RestaurantMenu>>) {
+                val data = response.body()!!.data
+
+                for(i in 0 until data.size){
+                    foods.add(data[i])
+                }
+
+                if (queryArgs != null) {
+                    foods = filterUsingQuery(foods)
+                }
+
+                if (foods.size == 0) {
+                    binding.foodsNoData.visibility = View.VISIBLE
+                } else {
+                    val foodAdapter = MenuAdapter(foods)
+                    foodAdapter.notifyDataSetChanged()
+                    foodRecyclerView.adapter = foodAdapter
+                }
+            }
+
+            override fun onFailure(call: Call<DefaultResponse<RestaurantMenu>>, t: Throwable) {
+                println(t.message)
+            }
+        })
+
+        drinkCall.enqueue(object: Callback<DefaultResponse<RestaurantMenu>> {
+            override fun onResponse(call: Call<DefaultResponse<RestaurantMenu>>, response: Response<DefaultResponse<RestaurantMenu>>) {
+                val data = response.body()!!.data
+
+                for(i in 0 until data.size){
+                    beverages.add(data[i])
+                }
+
+                if (queryArgs != null) {
+                    beverages = filterUsingQuery(beverages)
+                }
+
+                if (beverages.size == 0) {
+                    binding.beveragesNoData.visibility = View.VISIBLE
+                } else {
+                    val beveragesAdapter = MenuAdapter(beverages)
+                    beveragesAdapter.notifyDataSetChanged()
+                    beveragesRecyclerView.adapter = beveragesAdapter
+                }
+            }
+
+            override fun onFailure(call: Call<DefaultResponse<RestaurantMenu>>, t: Throwable) {
+                println(t.message)
+            }
+        })
+
     }
 
 
@@ -114,49 +168,15 @@ class MenuFragment : Fragment(), SensorEventListener {
         _binding = null
     }
 
-    private fun initAdapter(listMenuName: ArrayList<String>, recyclerView: RecyclerView) {
-        val listMenu = ArrayList<Menus>()
-        for (i in 0 until listMenuName.size) {
-            listMenu.add(Menus(listMenuName.get(i)))
 
-            if(listMenuName.size - 1 == i){
-                val menuAdapter = MenuAdapter(listMenu)
-                menuAdapter.notifyDataSetChanged()
-                recyclerView.adapter = menuAdapter
-            }
-        }
-    }
-
-    private fun fetchData(): Array<ArrayList<String>> {
-        var foods = ArrayList<String>()
-        var beverages = ArrayList<String>()
-
-        foods.addAll(arrayOf("Makanan A", "Makanan B", "Makanan C", "Makanan D",
-            "Makanan 1", "Makanan 2", "Makanan 3", "Makanan 4",
-            "Minuman A", "Minuman B", "Minuman C", "Minuman D",
-            "Minuman 1", "Minuman 2", "Minuman 3", "Minuman 4"))
-
-        beverages.addAll(arrayOf("Minuman A", "Minuman B", "Minuman C", "Minuman D",
-            "Minuman 1", "Minuman 2", "Minuman 3", "Minuman 4",
-            "Makanan A", "Makanan B", "Makanan C", "Makanan D",
-            "Makanan 1", "Makanan 2", "Makanan 3", "Makanan 4",))
-
-        if (queryArgs != null) {
-            foods = filterUsingQuery(foods)
-            beverages = filterUsingQuery(beverages)
-        }
-
-        return arrayOf(foods, beverages)
-    }
-
-    private fun filterUsingQuery(menus: ArrayList<String>): ArrayList<String> {
-        val filteredMenus = ArrayList<String>()
-        for (i in 0 until menus.size) {
-            if (menus[i].contains(queryArgs!!, true)){
-                filteredMenus.add(menus[i])
+    private fun filterUsingQuery(restaurantMenus: ArrayList<RestaurantMenu>): ArrayList<RestaurantMenu> {
+        val filteredRestaurantMenus = ArrayList<RestaurantMenu>()
+        for (i in 0 until restaurantMenus.size) {
+            if (restaurantMenus[i].name.contains(queryArgs!!, true)){
+                filteredRestaurantMenus.add(restaurantMenus[i])
             }
         }
 
-        return filteredMenus
+        return filteredRestaurantMenus
     }
 }
