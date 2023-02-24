@@ -1,71 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:layout_height="150dp"
+    app:cardElevation="6dp">
 
-    <TextView
-        android:id="@+id/branch_item_name"
-        android:layout_width="67dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:text="TextView"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/branch_item_menu_rec"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:padding="5dp">
 
-    <TextView
-        android:id="@+id/branch_item_address"
-        android:layout_width="50dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="4dp"
-        android:text="TextView"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/branch_item_phone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/branch_item_menu_rec" />
+        <TextView
+            android:id="@+id/branch_item_name"
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:text="TextView"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/branch_item_menu_rec"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <TextView
-        android:id="@+id/branch_item_phone"
-        android:layout_width="50dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="13dp"
-        android:text="TextView"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/branch_list_map"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/branch_item_address" />
+        <TextView
+            android:id="@+id/branch_item_address"
+            android:layout_width="50dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="4dp"
+            android:text="TextView"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/branch_item_phone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/branch_item_menu_rec" />
 
-    <TextView
-        android:id="@+id/branch_item_menu_rec"
-        android:layout_width="50dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/branch_item_address"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/branch_item_name" />
+        <TextView
+            android:id="@+id/branch_item_phone"
+            android:layout_width="50dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="13dp"
+            android:text="TextView"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/branch_list_map"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/branch_item_address" />
 
-    <Button
-        android:id="@+id/branch_list_map"
-        style="@style/Widget.Material3.Button"
-        android:layout_width="72dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="8dp"
-        android:text="Maps"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/branch_item_phone" />
+        <TextView
+            android:id="@+id/branch_item_menu_rec"
+            android:layout_width="50dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/branch_item_address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/branch_item_name" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/branch_list_map"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="72dp"
+            android:layout_height="39dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginTop="8dp"
+            android:text="Maps"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/branch_item_phone" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

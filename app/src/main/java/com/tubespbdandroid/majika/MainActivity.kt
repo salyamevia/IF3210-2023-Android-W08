@@ -3,17 +3,19 @@ package com.tubespbdandroid.majika
 import android.app.SearchManager
 import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.system.Os.remove
+import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.tubespbdandroid.majika.fragments.BranchFragment
-import com.tubespbdandroid.majika.fragments.CartFragment
-import com.tubespbdandroid.majika.fragments.MenuFragment
-import com.tubespbdandroid.majika.fragments.SearchBarFragment
+import com.tubespbdandroid.majika.databinding.ItemRestoBranchBinding
+import com.tubespbdandroid.majika.fragments.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -93,9 +95,17 @@ class MainActivity : AppCompatActivity() {
                     }
                     true
                 }
+
+                R.id.twibbon -> {
+                    supportFragmentManager.commit {
+                        replace<TwibbonFragment>(R.id.container)
+                    }
+                    true
+                }
                 else -> false
             }
         }
+    }
     }
 
     private fun setLayoutViewBasedOnOrientation(orientation: Int) {
