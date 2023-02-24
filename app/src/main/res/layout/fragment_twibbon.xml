@@ -28,5 +28,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/risu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

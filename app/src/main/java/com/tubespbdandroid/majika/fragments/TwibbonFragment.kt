@@ -3,10 +3,13 @@ package com.tubespbdandroid.majika.fragments
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.*
+import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -22,6 +25,7 @@ import androidx.fragment.app.Fragment
 import com.tubespbdandroid.majika.MainActivity
 import com.tubespbdandroid.majika.R
 import com.tubespbdandroid.majika.databinding.FragmentTwibbonBinding
+import kotlin.random.Random
 
 class TwibbonFragment: Fragment() {
     private var _fragmentTwibbonBinding: FragmentTwibbonBinding? = null
@@ -30,6 +34,18 @@ class TwibbonFragment: Fragment() {
 
     private var cameraButton: Button? = null
     private var cameraPreview: ImageView? = null
+
+    private val IMAGE_CAPTURE_CODE = 1001
+    private var imageUri: Uri? = null
+
+    private var twibbons = arrayOf(
+        R.drawable.risu,
+        R.drawable.anya,
+        R.drawable.kobokan,
+        R.drawable.reine,
+        R.drawable.yopi,
+        R.drawable.zeta
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -88,8 +104,31 @@ class TwibbonFragment: Fragment() {
         dialog.show()
     }
 
-    private val IMAGE_CAPTURE_CODE = 1001
-    private var imageUri: Uri? = null
+    private fun Blend(bottomImage2:Uri): Bitmap {
+        val randomValue = Random.nextInt(0, twibbons.size)
+
+        val contentSolver = requireActivity().contentResolver
+        val bottomImage1: Bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentSolver, bottomImage2))
+
+        val workingBitmap: Bitmap = BitmapFactory.decodeResource(context?.resources, twibbons[randomValue])
+        val topImage: Bitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true)
+
+        val workingBitmap2: Bitmap = Bitmap.createBitmap(bottomImage1)
+        val bottomImage: Bitmap = workingBitmap2.copy(Bitmap.Config.ARGB_8888, true)
+
+        val dest: Rect = Rect(0, 0, bottomImage.width, bottomImage.height)
+        BitmapFactory.Options().inPreferredConfig = Bitmap.Config.ARGB_8888
+
+        val canvas: Canvas = Canvas(bottomImage)
+        val paint: Paint = Paint()
+
+        paint.isFilterBitmap = true
+        canvas.drawBitmap(topImage, null, dest, paint)
+
+        return bottomImage
+
+
+    }
 
     private fun openCameraInterface() {
         val values = ContentValues()
@@ -106,7 +145,8 @@ class TwibbonFragment: Fragment() {
 
     val cameraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            cameraPreview?.setImageURI(imageUri)
+            cameraPreview?.setImageBitmap(imageUri?.let { Blend(it) })//imageUri)
+
         } else {
             showAlert("Failed to take camera picture")
         }
